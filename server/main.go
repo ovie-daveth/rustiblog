@@ -1,22 +1,32 @@
 package main
 
 import (
-	"rustiblog.com/server/database"
-	"rustiblog.com/server/routes"
+	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	"rustiblog.com/server/database"
+	"rustiblog.com/server/routes"
 )
 
 func main() {
-	// Initialize database
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
 	database.ConnectDB()
 
-	// Initialize Gin router
+	PORT := os.Getenv("PORT")
+	if PORT == "" {
+		PORT = "8080"
+		log.Printf("Server starting on port: %s", PORT)
+	}
+
 	router := gin.Default()
 
-	// Setup routes
 	routes.RegisterRoutes(router)
 
-	// Start the server
-	router.Run(":8080")
+	router.Run(":" + PORT)
 }
