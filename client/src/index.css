@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body{
+    background-color: #e6e6ff;
+    width: 100vw;
+    overflow-x: hidden;
+    font-family: "Montserat", sans-serif;
+}
+
+.animatedButton{
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 2s;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
